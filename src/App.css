@@ -1,0 +1,980 @@
+/* App.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Login Styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+  padding: 20px;
+}
+
+.login-form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+/* Styles pour le player de quiz */
+.quiz-player {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.question-progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #e9ecef;
+  border-radius: 6px;
+}
+
+.question-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.option-btn {
+  color:black;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.option-btn:hover {
+  background-color: #e9ecef;
+}
+
+.text-answer-container {
+  margin-top: 20px;
+}
+
+.text-answer-container textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.quiz-results {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.answers-review {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.answer-item {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+}
+
+.correct {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.incorrect {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Styles pour la gestion des absences */
+.gestion-absence {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.controles-absence {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.groupes-list {
+  border: 1px solid #e1e4e8;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.groupes-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.groupes-buttons button {
+  padding: 10px 15px;
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.groupes-buttons button.actif {
+  background-color: #8e44ad;
+}
+
+.groupe-editeur {
+  border: 1px solid #e1e4e8;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.groupe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.etudiants-list {
+  margin-top: 20px;
+}
+
+.liste-etudiants {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.etudiant-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.etudiant-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.etudiant-numero {
+  font-weight: bold;
+  min-width: 30px;
+}
+
+.etudiant-nom {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.presence-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.enregistrement-absence {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #e1e4e8;
+}
+
+.historique-absences {
+  border: 1px solid #e1e4e8;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.liste-absences {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.absence-item {
+  border: 1px solid #e1e4e8;
+  padding: 15px;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.absence-item h4 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.absence-item ul {
+  margin-left: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controles-absence {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .groupes-buttons {
+    flex-direction: column;
+  }
+  
+  .groupes-buttons button {
+    width: 100%;
+  }
+  
+  .groupe-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .etudiant-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .etudiant-info {
+    width: 100%;
+  }
+  
+  .etudiant-nom {
+    width: 100%;
+  }
+  
+  .quiz-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .question-progress {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-form .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.login-form .form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #2980b9;
+}
+
+.demo-accounts {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #3498db;
+}
+
+.demo-accounts p {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.demo-accounts ul {
+  list-style: none;
+}
+
+.demo-accounts li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.demo-accounts li:last-child {
+  border-bottom: none;
+}
+
+/* Header Styles */
+.app-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  margin-bottom: 15px;
+  font-size: 2.2rem;
+}
+
+.header-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logout-btn {
+  padding: 8px 15px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.onglets {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.onglets button {
+  padding: 12px 24px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.onglets button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.onglets button.actif {
+  background-color: #e74c3c;
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+}
+
+.contenu-principal {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Tableau Blanc Styles */
+.tableau-blanc-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.controles-tableau {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.controles-tableau label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.canvas-tableau {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: crosshair;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Creation Cours Styles */
+.creation-cours {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.controles-diapositives {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navigation-diapositives {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navigation-diapositives button {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.navigation-diapositives button:hover {
+  background-color: #2980b9;
+}
+
+.navigation-diapositives button.actif {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+}
+
+.editeur-diapositive {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.diapositive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.diapositive-header h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.image-item {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+}
+
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-item button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(231, 76, 60, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Exercices Styles */
+.creation-exercices {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.creation-exercices h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.controles-exercices {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.liste-exercices {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.exercice-item {
+  border: 1px solid #e1e4e8;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.exercice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.exercice-header h3 {
+  color: #2c3e50;
+}
+
+.exercice-props {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.exercice-props .form-group {
+  flex: 1;
+}
+
+/* Quiz Styles */
+.creation-quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.controles-quiz {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navigation-quiz {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navigation-quiz button {
+  padding: 10px 15px;
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.navigation-quiz button:hover {
+  background-color: #8e44ad;
+}
+
+.navigation-quiz button.actif {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+}
+
+.editeur-quiz {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.quiz-header h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.questions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 0 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+}
+
+.questions-header h4 {
+  color: #2c3e50;
+}
+
+.navigation-questions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.navigation-questions button {
+  padding: 8px 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.navigation-questions button:hover {
+  background-color: #2980b9;
+}
+
+.navigation-questions button.actif {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+}
+
+.editeur-question {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #e1e4e8;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.question-header h5 {
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.option-row input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.option-row input[type="radio"] {
+  margin: 0;
+}
+
+.question-props {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.question-props .form-group {
+  flex: 1;
+}
+
+/* Planification Styles */
+.planification-hebdo {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.planification-hebdo h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.controles-planification {
+  display: flex;
+  justify-content: center;
+}
+
+.editeur-planning {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.jour-planning {
+  border: 1px solid #e1e4e8;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+.jour-planning h3 {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #2c3e50;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3498db;
+}
+
+/* Button Styles */
+button {
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .app {
+    padding: 15px;
+  }
+  
+  .onglets {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .onglets button {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .canvas-tableau {
+    width: 100%;
+    height: 400px;
+  }
+  
+  .editeur-planning {
+    grid-template-columns: 1fr;
+  }
+  
+  .exercice-props {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .controles-tableau {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .images-container {
+    justify-content: center;
+  }
+  
+  .header-user {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .user-info {
+    justify-content: center;
+  }
+  
+  .question-props {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .option-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .option-row input[type="text"] {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 20px;
+  }
+  
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .controles-diapositives,
+  .controles-exercices,
+  .controles-quiz {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .controles-diapositives button,
+  .controles-exercices button,
+  .controles-quiz button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
