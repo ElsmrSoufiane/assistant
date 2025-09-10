@@ -44,7 +44,9 @@ const App = () => {
     Mardi: { matin: '', aprem: '' }, 
     Mercredi: { matin: '', aprem: '' }, 
     Jeudi: { matin: '', aprem: '' }, 
-    Vendredi: { matin: '', aprem: '' }
+    Vendredi: { matin: '', aprem: '' },
+    
+    Samedi: { matin: '', aprem: '' },
   });
 
   // Quiz state
