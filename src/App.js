@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+               
+              import React, { useState, useRef, useEffect } from 'react';
 import { jsPDF } from 'jspdf';
 import './App.css';
 
@@ -14,8 +15,10 @@ const App = () => {
   
   // User accounts
   const [userAccounts] = useState([
-    { id: 1, username: 'teacher', password: 'password123', name: 'Professor Smith', role: 'teacher' },
-    { id: 2, username: 'assistant', password: 'pass123', name: 'Teaching Assistant', role: 'assistant' }
+    { id: 1, username: 'Mahdi', password: 'Mahdi@2025', name: 'Mahdi tahiri', role: 'teacher' },
+    { id: 1, username: 'zakia', password: 'zakia@2025', name: 'lasmar zakia', role: 'teacher' },
+    { id: 1, username: 'fatima', password: 'fatima@2025', name: 'fatima boulkomit', role: 'teacher' },
+    
   ]);
 
   // Application state
@@ -75,11 +78,20 @@ const App = () => {
   const [scoreQuiz, setScoreQuiz] = useState(0);
   const [quizTermine, setQuizTermine] = useState(false);
 
-  // Absence state
-  const [groupes, setGroupes] = useState([]);
+  // Absence state - Chargement depuis le localStorage
+  const [groupes, setGroupes] = useState(() => {
+    const savedGroupes = localStorage.getItem('groupes');
+    return savedGroupes ? JSON.parse(savedGroupes) : [];
+  });
+  
   const [currentGroupe, setCurrentGroupe] = useState(null);
+  
   const [dateAbsence, setDateAbsence] = useState(new Date().toISOString().split('T')[0]);
-  const [absences, setAbsences] = useState([]);
+  
+  const [absences, setAbsences] = useState(() => {
+    const savedAbsences = localStorage.getItem('absences');
+    return savedAbsences ? JSON.parse(savedAbsences) : [];
+  });
 
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -95,18 +107,6 @@ const App = () => {
     if (authStatus === 'true' && userData) {
       setIsAuthenticated(true);
       setCurrentUser(JSON.parse(userData));
-    }
-
-    // Charger les groupes
-    const savedGroupes = localStorage.getItem('groupes');
-    if (savedGroupes) {
-      setGroupes(JSON.parse(savedGroupes));
-    }
-
-    // Charger les absences
-    const savedAbsences = localStorage.getItem('absences');
-    if (savedAbsences) {
-      setAbsences(JSON.parse(savedAbsences));
     }
   }, []);
 
@@ -505,64 +505,82 @@ const App = () => {
     alert(`Présences enregistrées pour le ${dateAbsence}`);
   };
 
-  const exporterAbsencesPDF = () => {
-    const pdf = new jsPDF();
-    
-    // En-tête
-    pdf.setFillColor(41, 128, 185);
-    pdf.rect(0, 0, 220, 30, 'F');
-    pdf.setTextColor(255, 255, 255);
-    pdf.setFontSize(16);
-    pdf.text('Rapport de Présences', 105, 12, { align: 'center' });
+ const exporterAbsencesPDF = () => {
+  if (absences.length === 0) {
+    alert("Aucune absence enregistrée !");
+    return;
+  }
+
+  const pdf = new jsPDF();
+
+  // En-tête
+  pdf.setFillColor(41, 128, 185);
+  pdf.rect(0, 0, 220, 30, 'F');
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(16);
+  pdf.text('Rapport de Présences', 105, 12, { align: 'center' });
+  pdf.setFontSize(12);
+  pdf.text(`Enseignant: ${currentUser.name}`, 105, 22, { align: 'center' });
+
+  let yPosition = 45;
+
+  // Grouper par date + groupe
+  const absencesParDateEtGroupe = {};
+  absences.forEach(absence => {
+    if (!absencesParDateEtGroupe[absence.date]) {
+      absencesParDateEtGroupe[absence.date] = {};
+    }
+    if (!absencesParDateEtGroupe[absence.date][absence.groupe]) {
+      absencesParDateEtGroupe[absence.date][absence.groupe] = [];
+    }
+    absencesParDateEtGroupe[absence.date][absence.groupe].push(absence);
+  });
+
+  // Boucle sur chaque date
+  Object.entries(absencesParDateEtGroupe).forEach(([date, groupesParDate]) => {
     pdf.setFontSize(12);
-    pdf.text(`Enseignant: ${currentUser.name}`, 105, 22, { align: 'center' });
-    
-    let yPosition = 45;
-    
-    // Grouper les absences par date
-    const absencesParDate = {};
-    absences.forEach(absence => {
-      if (!absencesParDate[absence.date]) {
-        absencesParDate[absence.date] = [];
-      }
-      absencesParDate[absence.date].push(absence);
-    });
-    
-    // Parcourir chaque date
-    Object.entries(absencesParDate).forEach(([date, absencesDate]) => {
-      if (yPosition > 250) {
-        pdf.addPage();
-        yPosition = 20;
-      }
-      
-      pdf.setFontSize(12);
-      pdf.setTextColor(52, 152, 219);
-      pdf.text(`Date: ${date}`, 15, yPosition);
-      yPosition += 10;
-      
-      // Afficher chaque étudiant avec son statut
-      absencesDate.forEach(etudiant => {
+    pdf.setTextColor(52, 152, 219);
+    pdf.text(`Date: ${date}`, 15, yPosition);
+    yPosition += 10;
+
+    // Boucle sur chaque groupe
+    Object.entries(groupesParDate).forEach(([groupe, absencesGroupe]) => {
+      pdf.setFontSize(11);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text(`Groupe: ${groupe}`, 20, yPosition);
+      yPosition += 7;
+
+      absencesGroupe.forEach(etudiant => {
         if (yPosition > 270) {
           pdf.addPage();
           yPosition = 20;
+
+          pdf.setFillColor(41, 128, 185);
+          pdf.rect(0, 0, 220, 10, 'F');
+          pdf.setTextColor(255, 255, 255);
+          pdf.setFontSize(10);
+          pdf.text(`Enseignant: ${currentUser.name}`, 105, 6, { align: 'center' });
+          pdf.setTextColor(0, 0, 0);
         }
-        
-        pdf.setFontSize(10);
-        pdf.setTextColor(0, 0, 0);
-        
-        const statut = etudiant.present ? 'Présent' : 'Absent';
+
+        const statut = etudiant.present ? "Présent" : "Absent";
         const couleur = etudiant.present ? [0, 128, 0] : [255, 0, 0];
-        
+
+        pdf.setFontSize(10);
         pdf.setTextColor(...couleur);
-        pdf.text(`${etudiant.numero}. ${etudiant.nom} - ${statut}`, 20, yPosition);
+        pdf.text(`${etudiant.numero}. ${etudiant.nom} - ${statut}`, 25, yPosition);
         yPosition += 7;
       });
-      
-      yPosition += 10;
+
+      yPosition += 5;
     });
-    
-    pdf.save(`presences_${currentUser.name.replace(/\s+/g, '_')}.pdf`);
-  };
+
+    yPosition += 10;
+  });
+
+  pdf.save(`presences_${currentUser.name.replace(/\s+/g, '_')}.pdf`);
+};
+
 
   // Export functions with teacher name
   const exporterPDF = async (type) => {
@@ -912,16 +930,7 @@ const App = () => {
             </div>
             <button type="submit">Se connecter</button>
           </form>
-          <div className="demo-accounts">
-            <p>Comptes de démonstration:</p>
-            <ul>
-              {userAccounts.map(acc => (
-                <li key={acc.id}>
-                  <strong>{acc.name}</strong> - {acc.username} / {acc.password}
-                </li>
-              ))}
-            </ul>
-          </div>
+          
         </div>
       </div>
     );
@@ -932,7 +941,10 @@ const App = () => {
     <div className="app">
       <header className="app-header">
         <div className="header-user">
-          <h1>Assistant Enseignant</h1>
+          <h4> <h1>Assistant Enseignant</h1>
+            
+            par <b> lasmar soufiane</b>
+          </h4>
           <div className="user-info">
             <span>Connecté en tant que: {currentUser.name}</span>
             <button onClick={handleLogout} className="logout-btn">Déconnexion</button>
@@ -1166,7 +1178,7 @@ const App = () => {
                     <h3>Exercice {index + 1}</h3>
                     <button onClick={() => supprimerExercice(index)}>
                       Supprimer
-                    </button>
+                      </button>
                   </div>
                   
                   <div className="form-group">
